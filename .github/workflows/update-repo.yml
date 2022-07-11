@@ -13,7 +13,7 @@ jobs:
         run: yum install -y dnf rpmdevtools rpmlint createrepo_c git
 
       - name: Workaround pull-request-creation
-        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+        run: echo "$GITHUB_WORKSPACE" && git config --global --add safe.directory "$GITHUB_WORKSPACE"
 
       - name: Update repositories
         run: createrepo --update --database --zck --deltas ./open-source && createrepo --update --database --zck --deltas ./proprietary
