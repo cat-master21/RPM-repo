@@ -2,9 +2,6 @@ name: update RPM databases
 on:
   push:
     branches: [ main ]
-defaults:
-  run:
-    shell: bash
 jobs:
   build-package:
     runs-on: ubuntu-latest
