@@ -15,9 +15,9 @@ jobs:
       - name: Workaround pull-request-creation
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          /usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
-          /usr/bin/git config --local --get remote.origin.url
-          /usr/bin/git config --local --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+          /usr/bin/git config --global --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+          /usr/bin/git config --global --get remote.origin.url
+          /usr/bin/git config --global --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
 
       - name: Update repositories
         run: createrepo --update --database --zck --deltas ./open-source && createrepo --update --database --zck --deltas ./proprietary
