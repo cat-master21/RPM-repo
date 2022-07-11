@@ -1,0 +1,19 @@
+name: update RPM databases
+on:
+  push:
+    branches: [ main ]
+defaults:
+  run:
+    shell: bash
+jobs:
+  build-package:
+    runs-on: ubuntu-latest
+    container: fedora:latest
+    steps:
+      - uses: actions/checkout@v2.4.2
+      
+      - name: Install required packages
+        run: yum install -y dnf rpmdevtools rpmlint createrepo_c
+        
+      - name: Update repositories
+      - run: createrepo --update --database --zck --deltas ./open-source && createrepo --update --database --zck --deltas ./propietary
