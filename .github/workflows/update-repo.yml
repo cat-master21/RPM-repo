@@ -10,10 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     container: fedora:latest
     steps:
-      - uses: actions/checkout@v2.4.2
+      - uses: actions/checkout@v3
       
       - name: Install required packages
         run: yum install -y dnf rpmdevtools rpmlint createrepo_c
         
       - name: Update repositories
         run: createrepo --update --database --zck --deltas ./open-source && createrepo --update --database --zck --deltas ./proprietary
+        
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4.0.4
+        with: 
+          title: Update RPM databases
+          delete-branch: true
+          assignees: cat-master21
+          body: Update RPM databases/repositories! (Automated)
+          branch: update-RPM-repo
