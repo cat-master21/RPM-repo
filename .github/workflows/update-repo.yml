@@ -12,7 +12,12 @@ jobs:
         run: sudo apt-get install -yq createrepo-c
 
       - name: Update repositories
-        run: createrepo_c --update --database --zck --deltas ./open-source && createrepo_c --update --database --zck --deltas ./proprietary && git commit -m "Update RPM repositories"
+        run: |
+          createrepo_c --update --database --zck --deltas ./open-source
+          createrepo_c --update --database --zck --deltas ./proprietary
+          git config --global user.email "96554164+cat-master21@users.noreply.github.com"
+          git config --global user.name "cat-master21 (bot)"
+          git commit -m "Update RPM repositories"
         
       - name: Git Commit and Push
         uses: github-actions-x/commit@v2.9
