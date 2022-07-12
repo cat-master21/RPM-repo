@@ -12,7 +12,7 @@ jobs:
         run: sudo apt-get install -yq createrepo-c
 
       - name: Update repositories
-        run: createrepo_c --update --database --zck --deltas ./open-source && createrepo_c --update --database --zck --deltas ./proprietary
+        run: createrepo_c --update --database --zck --deltas ./open-source && createrepo_c --update --database --zck --deltas ./proprietary && git commit -m "Update RPM repositories"
         
       - name: Git Commit and Push
         uses: github-actions-x/commit@v2.9
