@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Install required packages
-        run: apt-get install -yq createrepo-c
+        run: sudo apt-get install -yq createrepo-c
 
       - name: Update repositories
         run: createrepo_c --update --database --zck --deltas ./open-source && createrepo_c --update --database --zck --deltas ./proprietary
