@@ -5,28 +5,18 @@ on:
 jobs:
   build-package:
     runs-on: ubuntu-latest
-    container: fedora:latest
     steps:
       - uses: actions/checkout@v3
       
       - name: Install required packages
-        run: yum install -y dnf rpmdevtools rpmlint createrepo_c git
-
-      - name: Workaround pull-request-creation
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          /usr/bin/git config --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
-          /usr/bin/git config --get remote.origin.url
-          /usr/bin/git config --name-only --get-regexp http.https://github.com/.extraheader ^AUTHORIZATION:
+        run: apt-get install -yq createrepo-c
 
       - name: Update repositories
-        run: createrepo --update --database --zck --deltas ./open-source && createrepo --update --database --zck --deltas ./proprietary
+        run: createrepo_c --update --database --zck --deltas ./open-source && createrepo_c --update --database --zck --deltas ./proprietary
         
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4.0.4
-        with: 
-          title: Update RPM databases
-          delete-branch: true
-          assignees: cat-master21
-          body: Update RPM databases/repositories! (Automated)
-          branch: update-RPM-repo
+      - name: Git Commit and Push
+        uses: github-actions-x/commit@v2.9
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          push-branch: 'main'
+          commit-message: 'Update RPM repositories'
