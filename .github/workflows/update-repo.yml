@@ -16,7 +16,7 @@ jobs:
           createrepo_c --update --database --zck --deltas ./open-source
           createrepo_c --update --database --zck --deltas ./proprietary
           git config --global user.email "96554164+cat-master21@users.noreply.github.com"
-          git config --global user.name "cat-master21 (bot)"
+          git config --global user.name "updater(bot)"
           git commit -m "Update RPM repositories" -a
         
       - name: Git Commit and Push
@@ -25,5 +25,5 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: 'main'
           commit-message: 'Update RPM repositories'
-          name: cat-master21 (bot)
+          name: updater(bot)
           email: 96554164+cat-master21@users.noreply.github.com
