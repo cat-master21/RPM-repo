@@ -1,0 +1,3 @@
+[submodule "open-source/P/pacstall"]
+	path = open-source/P/pacstall
+	url = https://github.com/pacstall/pacstall.git

@@ -1,7 +1,6 @@
 name: update RPM databases
 on:
   push:
-    branches: main
 jobs:
   build-package:
     runs-on: ubuntu-22.04
@@ -23,6 +22,6 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Update RPM repositories'
-          name: updater(bot)
+          name: updater-bot
           email: 96554164+cat-master21@users.noreply.github.com
           rebase: 'true'
