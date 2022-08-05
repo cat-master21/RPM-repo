@@ -16,6 +16,7 @@ jobs:
           createrepo_c --update --database --zck --deltas ./proprietary
           git config --global user.email "96554164+cat-master21@users.noreply.github.com"
           git config --global user.name "updater(bot)"
+          ls ./open-source/P
         
       - name: Git Commit and Push
         uses: github-actions-x/commit@v2.9
