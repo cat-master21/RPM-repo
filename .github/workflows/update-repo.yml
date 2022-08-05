@@ -13,6 +13,7 @@ jobs:
             rpm:
             - 'open-source/P/proot/*.rpm'
             - '*/*.rpm'
+            - '*.rpm'
 
       - name: Install required packages
         run: sudo apt-get install -yq createrepo-c
