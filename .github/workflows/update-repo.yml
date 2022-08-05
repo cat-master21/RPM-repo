@@ -6,16 +6,20 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            rpm:
+            - 'open-source/P/proot/*.rpm'
+            - '*/*.rpm
       
       - name: Install required packages
         run: sudo apt-get install -yq createrepo-c
 
-      - name: Update repositories
-        run: |
-          chmod +x ./.github/up.sh
-          bash ./.github/up.sh
-          git config --global user.email "96554164+cat-master21@users.noreply.github.com"
-          git config --global user.name "updater(bot)"
+      - name: backend tests
+        if: steps.filter.outputs.rpm == 'true'
+        run: echo yes && createrepo_c --update --database --deltas ./open-source
         
       - name: Git Commit and Push
         uses: github-actions-x/commit@v2.9
