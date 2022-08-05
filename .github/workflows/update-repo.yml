@@ -12,11 +12,11 @@ jobs:
 
       - name: Update repositories
         run: |
-          createrepo_c --update --database --zck --deltas ./open-source
-          createrepo_c --update --database --zck --deltas ./proprietary
+          if [[ "$(git log -n 1 --pretty=format:%H)" == "$(git log -n 1 --pretty=format:%H -- *.rpm)" ]]; then
+            createrepo_c --update --database --deltas ./open-source
+          fi
           git config --global user.email "96554164+cat-master21@users.noreply.github.com"
           git config --global user.name "updater(bot)"
-          ls ./open-source/P
         
       - name: Git Commit and Push
         uses: github-actions-x/commit@v2.9
