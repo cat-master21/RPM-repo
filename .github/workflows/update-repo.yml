@@ -12,6 +12,7 @@ jobs:
 
       - name: Update repositories
         run: |
+          chmod +x ./.github/up.sh
           bash ./.github/up.sh
           git config --global user.email "96554164+cat-master21@users.noreply.github.com"
           git config --global user.name "updater(bot)"
