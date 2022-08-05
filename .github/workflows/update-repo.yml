@@ -13,14 +13,14 @@ jobs:
             rpm:
             - 'open-source/P/proot/*.rpm'
             - '*/*.rpm
-      
+
       - name: Install required packages
         run: sudo apt-get install -yq createrepo-c
 
       - name: backend tests
         if: steps.filter.outputs.rpm == 'true'
         run: echo yes && createrepo_c --update --database --deltas ./open-source
-        
+
       - name: Git Commit and Push
         uses: github-actions-x/commit@v2.9
         with:
