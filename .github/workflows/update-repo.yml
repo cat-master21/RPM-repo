@@ -12,7 +12,8 @@ jobs:
 
       - name: Update repositories
         run: |
-          if [[ "$(git log -n 1 --pretty=format:%H)" == "$(git log -n 1 --pretty=format:%H -- *.rpm)" ]]; then
+          if [[ "$(git log -n 1 --pretty=format:%H)" == "$(git log -n 1 --pretty=format:%H -- *.rpm)" ]]
+          then
             createrepo_c --update --database --deltas ./open-source
           fi
           git config --global user.email "96554164+cat-master21@users.noreply.github.com"
